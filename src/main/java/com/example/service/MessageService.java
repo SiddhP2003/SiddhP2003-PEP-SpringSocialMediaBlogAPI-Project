@@ -51,7 +51,7 @@ public class MessageService {
     return null;
   }
 
-  public Message updateMessage(Integer messageId, String messageText){
+  public Integer updateMessage(Integer messageId, String messageText){
     if(messageText == null || messageText.isBlank() || messageText.length() > 255){
       throw new InvalidRequestException("Message Update Unsuccessful");
     }
@@ -59,6 +59,6 @@ public class MessageService {
 
     message.setMessageText(messageText);
     messageRepository.save(message);
-    return message;
+    return 1;
   }
 }
