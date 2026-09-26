@@ -31,5 +31,10 @@ public class SocialMediaController {
     return ResponseEntity.ok(accountService.register(newAccount));
   }
 
+  @PostMapping("/login")
+  public ResponseEntity<Account> login(@RequestBody Account account) {
+    return ResponseEntity.ok(accountService.login(account));
+  }
+
 
 }

@@ -18,4 +18,14 @@ public class GlobalExceptionHandler {
   public ResponseEntity<Void> handleInvalid() {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
   }
+
+  @ExceptionHandler (AccountDoesNotExistException.class)
+  public ResponseEntity<Void> handleAccountDoesNotExist() {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+  }
+
+  @ExceptionHandler (IncorrectPasswordException.class)
+  public ResponseEntity<Void> handleIncorrectPassword() {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+  }
 }

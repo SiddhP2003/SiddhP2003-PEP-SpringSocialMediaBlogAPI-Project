@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.exception.DuplicateUsernameException;
 import com.example.exception.InvalidRequestException;
+import com.example.exception.AccountDoesNotExistException;
+import com.example.exception.IncorrectPasswordException;
 import com.example.repository.AccountRepository;
 import com.example.entity.Account;
 
@@ -32,7 +34,29 @@ public class AccountService {
     if(accountRepository.findAccountByUsername(username) != null){
       throw new DuplicateUsernameException("Username already exists");
     }
-    
+
     return accountRepository.save(newAccount);
+  }
+
+  public Account login(Account account){
+    String username = account.getUsername();
+    String password = account.getPassword();
+
+    if (username == null || password == null){
+      throw new AccountDoesNotExistException("Invalid username or password");
+    }
+
+    Account storedAccount = accountRepository.findAccountByUsername(account.getUsername());
+
+    if(storedAccount == null){
+      throw new AccountDoesNotExistException("Username does not exist");
+    }
+
+    if(!storedAccount.getPassword().equals(password)){
+      throw new IncorrectPasswordException("Invalid password");
+        }
+
+    return storedAccount;
+
   }
 }
