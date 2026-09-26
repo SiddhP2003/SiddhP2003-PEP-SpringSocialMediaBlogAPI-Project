@@ -51,14 +51,14 @@ public class MessageService {
     return null;
   }
 
-  public Integer updateMessage(Integer messageId, String messageText){
-    if(messageText == null || !messageText.isBlank() || messageText.length() > 255){
+  public Message updateMessage(Integer messageId, String messageText){
+    if(messageText == null || messageText.isBlank() || messageText.length() > 255){
       throw new InvalidRequestException("Message Update Unsuccessful");
     }
     Message message = messageRepository.findById(messageId).orElseThrow(() -> new InvalidRequestException("Message does not exist"));
 
     message.setMessageText(messageText);
     messageRepository.save(message);
-    return 1;
+    return message;
   }
 }
