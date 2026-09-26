@@ -3,6 +3,7 @@ package com.example.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.service.AccountService;
@@ -11,6 +12,7 @@ import com.example.entity.Account;
 import com.example.entity.Message;
 import com.example.exception.DuplicateUsernameException;
 import com.example.exception.InvalidRequestException;
+import java.util.*;
 
 
 /**
@@ -43,6 +45,11 @@ public class SocialMediaController {
   @PostMapping("/messages")
   public ResponseEntity<Message> createMessage(@RequestBody Message message){
     return ResponseEntity.ok(messageService.createMessage(message));
+  }
+
+  @GetMapping("/messages")
+  public ResponseEntity<List<Message>> getAllMessages(){
+    return ResponseEntity.ok(messageService.getAllMessages());
   }
 
 

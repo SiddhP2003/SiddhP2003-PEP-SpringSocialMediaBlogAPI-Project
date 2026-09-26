@@ -10,6 +10,7 @@ import com.example.repository.MessageRepository;
 import com.example.entity.Account;
 import com.example.entity.Message;
 import com.example.exception.InvalidRequestException;
+import java.util.*;
 
 @Service
 public class MessageService {
@@ -31,5 +32,9 @@ public class MessageService {
 
     return messageRepository.save(message);
 
+  }
+
+  public List<Message> getAllMessages(){
+    return messageRepository.findAll();
   }
 }
