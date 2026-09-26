@@ -28,4 +28,5 @@ public class GlobalExceptionHandler {
   public ResponseEntity<Void> handleIncorrectPassword() {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
   }
+
 }

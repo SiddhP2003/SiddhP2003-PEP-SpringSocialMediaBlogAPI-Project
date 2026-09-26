@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.service.AccountService;
+import com.example.service.MessageService;
 import com.example.entity.Account;
+import com.example.entity.Message;
 import com.example.exception.DuplicateUsernameException;
 import com.example.exception.InvalidRequestException;
 
@@ -21,9 +23,11 @@ import com.example.exception.InvalidRequestException;
 public class SocialMediaController {
   
   private final AccountService accountService;
+  private final MessageService messageService;
 
-  public SocialMediaController(AccountService accountService){
+  public SocialMediaController(AccountService accountService, MessageService messageService){
     this.accountService = accountService;
+    this.messageService = messageService;
   }
 
   @PostMapping("/register")
@@ -34,6 +38,11 @@ public class SocialMediaController {
   @PostMapping("/login")
   public ResponseEntity<Account> login(@RequestBody Account account) {
     return ResponseEntity.ok(accountService.login(account));
+  }
+
+  @PostMapping("/messages")
+  public ResponseEntity<Message> createMessage(@RequestBody Message message){
+    return ResponseEntity.ok(messageService.createMessage(message));
   }
 
 
